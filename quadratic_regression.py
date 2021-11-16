@@ -1,5 +1,5 @@
-from typing import Callable, Tuple, List
 import random
+from typing import Callable, List, Tuple
 
 
 Input = Tuple[float, float, float]
@@ -12,7 +12,7 @@ Dataset = List[Tuple[Input, float]]
 class QuadraticBasisPolynomials:
     def __init__(self):
         self.basis_functions = [
-            lambda x: 1,
+            lambda _: 1,
             lambda x: x[0],
             lambda x: x[1],
             lambda x: x[2],
@@ -77,7 +77,7 @@ def gradient_descent(
 ) -> Hypothesis:
     weights = [
         random.random() * 2 - 1
-        for i in range(len(basis))
+        for _ in range(len(basis))
     ]
 
     last_error = total_error(weights, data)
@@ -110,7 +110,7 @@ def example_quadratic_data(num_points: int):
         return 2 - 4*x*y + z + z**2
 
     data = []
-    for i in range(num_points):
+    for _ in range(num_points):
         x, y, z = random.random(), random.random(), random.random()
         data.append(((x, y, z), fn(x, y, z)))
 
